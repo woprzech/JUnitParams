@@ -1,12 +1,12 @@
 package junitparams.internal;
 
-import java.lang.reflect.Field;
-
 import org.junit.internal.AssumptionViolatedException;
 import org.junit.internal.runners.model.EachTestNotifier;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.Statement;
+
+import java.lang.reflect.Field;
 
 /**
  * Testmethod-level functionalities for parameterised tests
@@ -61,10 +61,19 @@ public class ParameterisedTestMethodRunner {
         InvokeParameterisedMethod parameterisedInvoker = findParameterisedMethodInvokerInChain(methodInvoker);
 
         for (Description child : methodDescription.getChildren()) {
-            if (parameterisedInvoker.matchesDescription(child))
-                return child;
+            if (parameterisedInvoker.matchesDescription(child)) {
+                return unwrapDescriptionIfHasChild(child);
+            }
         }
         return null;
+    }
+
+    private Description unwrapDescriptionIfHasChild(Description child) {
+        if (child.getChildren() != null && child.getChildren().size() > 0) {
+            return child.getChildren().get(0);
+        } else {
+            return child;
+        }
     }
 
     private InvokeParameterisedMethod findParameterisedMethodInvokerInChain(Statement methodInvoker) {
