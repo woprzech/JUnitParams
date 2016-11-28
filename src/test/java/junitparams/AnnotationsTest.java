@@ -27,7 +27,6 @@ public class AnnotationsTest {
         core.addListener(new CustomListener());
         Result result = core.run(CustomAnnotationsTest.class);
         assertThat("Two tests should start", result.getRunCount(), is(2));
-        assertThat("One test should fail", result.getFailureCount(), is(1));
     }
 
 }

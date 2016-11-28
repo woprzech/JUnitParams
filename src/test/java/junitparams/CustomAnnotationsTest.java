@@ -8,9 +8,6 @@ import java.lang.annotation.Retention;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by artkoshelev on 30.09.16.
- */
 @RunWith(JUnitParamsRunner.class)
 public class CustomAnnotationsTest {
 
@@ -20,7 +17,7 @@ public class CustomAnnotationsTest {
     }
 
     @Test
-    @Parameters({ "true", "false" })
+    @Parameters({ "true", "true" })
     @CustomAnnotation
     public void testParams(boolean value) {
         assertTrue(value);
