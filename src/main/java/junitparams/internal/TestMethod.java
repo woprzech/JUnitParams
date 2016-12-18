@@ -1,19 +1,18 @@
 package junitparams.internal;
 
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import junitparams.internal.annotation.FrameworkMethodAnnotations;
+import junitparams.internal.parameters.ParametersReader;
+import junitparams.naming.MacroSubstitutionNamingStrategy;
+import junitparams.naming.TestCaseNamingStrategy;
 import org.junit.Ignore;
 import org.junit.runner.Description;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.TestClass;
 
-import junitparams.internal.annotation.FrameworkMethodAnnotations;
-import junitparams.internal.parameters.ParametersReader;
-import junitparams.naming.MacroSubstitutionNamingStrategy;
-import junitparams.naming.TestCaseNamingStrategy;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A wrapper for a test method
@@ -137,5 +136,9 @@ public class TestMethod {
 
     boolean isParameterised() {
         return frameworkMethodAnnotations.isParametrised();
+    }
+
+    public boolean isParallel() {
+        return frameworkMethodAnnotations.isParallel();
     }
 }

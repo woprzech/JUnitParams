@@ -46,4 +46,6 @@ public @interface Parameters {
      * Example: <code>@Parameters(method = "womenParams, menParams")</code>
      */
     String method() default "";
+
+    boolean parallel() default false;
 }

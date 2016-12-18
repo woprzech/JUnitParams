@@ -1,16 +1,16 @@
 package junitparams.internal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Testclass-level functionalities to handle parameters from a JUnit runner
@@ -135,6 +135,10 @@ public class ParameterisedTestClassRunner {
         return testMethod.isParameterised();
     }
 
+    public boolean shouldRunParalel(TestMethod testMethod) {
+        return testMethod.isParallel();
+    }
+
     /**
      * Executes parameterised method.
      *
@@ -173,5 +177,4 @@ public class ParameterisedTestClassRunner {
     public TestMethod testMethodFor(FrameworkMethod method) {
         return testMethods.get(method);
     }
-
 }

@@ -1,11 +1,10 @@
 package junitparams.internal.annotation;
 
-import java.lang.annotation.Annotation;
-
-import org.junit.runners.model.FrameworkMethod;
-
 import junitparams.Parameters;
 import junitparams.custom.CustomParameters;
+import org.junit.runners.model.FrameworkMethod;
+
+import java.lang.annotation.Annotation;
 
 public class FrameworkMethodAnnotations {
 
@@ -20,16 +19,12 @@ public class FrameworkMethodAnnotations {
                 || hasCustomParameters();
     }
 
-    public Annotation[] allAnnotations() {
-        return frameworkMethod.getAnnotations();
+    public boolean hasAnnotation(Class<? extends Annotation> annotation) {
+        return getAnnotation(annotation) != null;
     }
 
     public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
         return frameworkMethod.getAnnotation(annotationType);
-    }
-
-    public boolean hasAnnotation(Class<? extends Annotation> annotation) {
-        return getAnnotation(annotation) != null;
     }
 
     public boolean hasCustomParameters() {
@@ -49,5 +44,17 @@ public class FrameworkMethodAnnotations {
             }
         }
         return null;
+    }
+
+    public boolean isParallel() {
+        if (!hasAnnotation((Parameters.class))) {
+            return false;
+        }
+        Parameters parameters = getAnnotation(Parameters.class);
+        return parameters.parallel();
+    }
+
+    public Annotation[] allAnnotations() {
+        return frameworkMethod.getAnnotations();
     }
 }
